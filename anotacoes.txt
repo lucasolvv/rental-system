@@ -1,0 +1,5 @@
+rodando compose 
+docker-compose up --build -d
+
+# Sobe apenas o banco e mensageria
+docker-compose up postgres rabbitmq -d
