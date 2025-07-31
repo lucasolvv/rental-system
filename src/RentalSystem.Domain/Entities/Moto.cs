@@ -9,7 +9,7 @@ namespace RentalSystem.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public int Ano { get; set; }
+        public string Ano { get; set; }
 
         [Required]
         [MaxLength(100)]
