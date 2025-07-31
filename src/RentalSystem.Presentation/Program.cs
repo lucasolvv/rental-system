@@ -1,5 +1,6 @@
 using RentalSystem.Application;
 using RentalSystem.Infra;
+using RentalSystem.Presentation.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +20,8 @@ builder.Configuration
 
 
 
-//my injections
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddInfraDependencies(builder.Configuration);
-
 builder.Services.AddApplicationDependencies();
 
 var app = builder.Build();
