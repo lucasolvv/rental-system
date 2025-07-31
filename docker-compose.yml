@@ -1,39 +1,27 @@
 version: '3.9'
-
-services:
-  api:
-    build:
-      context: .
-      dockerfile: ./src/Delivery.WebApi/Dockerfile
-    container_name: delivery_api
-    ports:
-      - "5000:80"
-    depends_on:
-      - postgres
-      - rabbitmq
-
+services: 
   postgres:
     image: postgres:15
-    container_name: delivery_postgres
+    container_name: rentalsystem_postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: delivery
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminrentalsystem
+      POSTGRES_DB: rentalsystemdb
     ports:
       - "5432:5432"
     volumes:
-      - delivery_pgdata:/var/lib/postgresql/data
+      - rentalsystem_pgdata:/var/lib/postgresql/data
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: delivery_rabbit
+    container_name: rentalsystem_rabbit
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: adminrentalsystem
 
 volumes:
-  delivery_pgdata:
+  rentalsystem_pgdata:
