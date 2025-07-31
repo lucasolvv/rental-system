@@ -1,6 +1,7 @@
 ﻿using RentalSystem.Domain.Contracts.MotoContracts;
 using AutoMapper;
 using RentalSystem.Communication.Requests.Motos;
+using RentalSystem.Exceptions.ExceptionBase;
 namespace RentalSystem.Application.UseCases.Motos.CreateMotoUseCases
 {
     public class CreateMotoUseCase : ICreateMotoUseCase
@@ -31,8 +32,10 @@ namespace RentalSystem.Application.UseCases.Motos.CreateMotoUseCases
         {
             var motoExists = await _motoReadOnlyRepository.MotoAlreadyExists(request.Placa);
             
-            if (motoExists) throw new ArgumentException("Moto with the same placa already exists.");
-            
+            if (motoExists)
+            {
+                throw new ErrorOnValidationException($"Moto com a placa {request.Placa} ja consta em nossa base.");
+            } 
             
         }
     }
