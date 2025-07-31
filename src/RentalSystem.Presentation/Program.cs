@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using RentalSystem.Infra.DataAccess;
+using RentalSystem.Application;
+using RentalSystem.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +17,12 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .AddEnvironmentVariables();
 
-builder.Services.AddDbContext<RentalSystemDbContext>(options => 
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+//my injections
+builder.Services.AddInfraDependencies(builder.Configuration);
+
+builder.Services.AddApplicationDependencies();
 
 var app = builder.Build();
 
