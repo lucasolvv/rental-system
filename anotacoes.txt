@@ -33,3 +33,12 @@ rollback
 dotnet ef database update NomeDaMigration
 
 
+acessando banco de dados no Docker
+
+docker exec -it rentalsystem_postgres psql -U admin -d rentalsystemdb
+
+✅ Para listar todas as tabelas do banco:
+
+\dt
+\d motos
+
