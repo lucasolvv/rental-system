@@ -4,10 +4,8 @@
     {
         public string Mensagem { get; set; }
 
-        public ResponseErrorJson(string errorMessage)
-        {
-            Mensagem = errorMessage;
-        }
+        public ResponseErrorJson(string errorMessage) => Mensagem = errorMessage;
+        
 
     }
 }
