@@ -7,53 +7,53 @@ namespace RentalSystem.Infra.DataAccess
     {
         public RentalSystemDbContext(DbContextOptions<RentalSystemDbContext> options) : base(options) { }
 
-        public DbSet<Moto> Motos { get; set; }
-        public DbSet<Entregador> Entregadores { get; set; }
-        public DbSet<Locacao> Locacoes { get; set; }
-        public DbSet<EventoMotoCadastrada> EventosMotoCadastrada { get; set; }
+        public DbSet<Motorcycle> Motorcycles { get; set; }
+        public DbSet<DeliveryDriver> DeliveryDrivers { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<MotorcycleRegisteredEvent> MotorcycleRegisteredEvent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Moto>(entity =>
+            modelBuilder.Entity<Motorcycle>(entity =>
             {
-                entity.ToTable("motos");
+                entity.ToTable("motorcyles");
 
-                entity.HasIndex(m => m.Placa).IsUnique();
-                entity.Property(m => m.Placa).HasColumnName("placa");
-                entity.Property(m => m.Modelo).HasColumnName("modelo");
-                entity.Property(m => m.Ano).HasColumnName("ano");
+                entity.HasIndex(m => m.LicensePlate).IsUnique();
+                entity.Property(m => m.LicensePlate).HasColumnName("license_plate");
+                entity.Property(m => m.Model).HasColumnName("model");
+                entity.Property(m => m.Year).HasColumnName("year");
             });
 
-            modelBuilder.Entity<Entregador>(entity =>
+            modelBuilder.Entity<DeliveryDriver>(entity =>
             {
-                entity.ToTable("entregadores");
+                entity.ToTable("delivery_drivers");
 
                 entity.HasIndex(e => e.Cnpj).IsUnique();
-                entity.HasIndex(e => e.NumeroCnh).IsUnique();
+                entity.HasIndex(e => e.Cnh).IsUnique();
                 entity.Property(e => e.Cnpj).HasColumnName("cnpj");
-                entity.Property(e => e.NumeroCnh).HasColumnName("numero_cnh");
-                entity.Property(e => e.TipoCnh).HasColumnName("tipo_cnh");
-                entity.Property(e => e.ImagemCnhPath).HasColumnName("imagem_cnh_path");
+                entity.Property(e => e.Cnh).HasColumnName("cnh");
+                entity.Property(e => e.LicenseType).HasColumnName("license_type");
+                entity.Property(e => e.LicenseImagePath).HasColumnName("license_img_path");
             });
 
-            modelBuilder.Entity<Locacao>(entity =>
+            modelBuilder.Entity<Rental>(entity =>
             {
-                entity.ToTable("locacoes");
-                entity.Property(l => l.ValorDiaria)
+                entity.ToTable("rentals");
+                entity.Property(l => l.DailyRate)
                       .HasColumnType("numeric(10,2)");
-                entity.Property(l => l.ValorTotal)
+                entity.Property(l => l.TotalValue)
                       .HasColumnType("numeric(10,2)");
-                entity.HasOne(l => l.Entregador)
+                entity.HasOne(l => l.DeliveryDriver)
                       .WithMany()
-                      .HasForeignKey(l => l.EntregadorId);
-                entity.HasOne(l => l.Moto)
+                      .HasForeignKey(l => l.DeliveryDriverId);
+                entity.HasOne(l => l.Motorcycle)
                       .WithMany()
-                      .HasForeignKey(l => l.MotoId);
+                      .HasForeignKey(l => l.MotorcycleId);
             });
-            modelBuilder.Entity<EventoMotoCadastrada>(entity =>
+            modelBuilder.Entity<MotorcycleRegisteredEvent>(entity =>
             {
-                entity.ToTable("eventos_moto_cadastrada");
-                entity.Property(e => e.ConteudoMensagem).HasColumnType("text");
+                entity.ToTable("motorcycle_registered_events");
+                entity.Property(e => e.MessageContent).HasColumnType("text");
             });
         }
     }

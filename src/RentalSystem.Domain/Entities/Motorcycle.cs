@@ -1,22 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 
 namespace RentalSystem.Domain.Entities
 {
-    public class Moto
+    public class Motorcycle
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string Ano { get; set; }
+        public string Year { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string Modelo { get; set; }
+        public string Model { get; set; }
 
         [Required]
         [MaxLength(10)]
-        public string Placa { get; set; }
+        public string LicensePlate { get; set; }
     }
+
 }

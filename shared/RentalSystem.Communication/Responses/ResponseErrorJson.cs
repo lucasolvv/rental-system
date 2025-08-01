@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace RentalSystem.Communication.Responses
+﻿namespace RentalSystem.Communication.Responses
 {
     public class ResponseErrorJson
     {

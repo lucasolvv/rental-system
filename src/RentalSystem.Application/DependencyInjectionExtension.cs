@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RentalSystem.Application.Services.AutoMapper;
-using RentalSystem.Application.UseCases.Motos.CreateMotoUseCases;
+using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 namespace RentalSystem.Application
 {
     public static class DependencyInjectionExtension
@@ -21,7 +21,7 @@ namespace RentalSystem.Application
 
         private static void AddUseCases(IServiceCollection services)
         {
-            services.AddScoped<ICreateMotoUseCase, CreateMotoUseCase>();
+            services.AddScoped<ICreateMotorcycleUseCase, CreateMotorcycleUseCase>();
         }
 
     }

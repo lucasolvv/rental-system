@@ -1,6 +1,6 @@
-﻿namespace RentalSystem.Communication.Requests.Motos
+﻿namespace RentalSystem.Communication.Requests.Motorcycle
 {
-    public class RequestCreateMotoJson
+    public class RequestCreateMotorcycleJson
     {
         public string Ano { get; set; }
         public string Modelo { get; set; }

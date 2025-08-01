@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RentalSystem.Communication.Requests.Motos;
+using RentalSystem.Communication.Requests.Motorcycle;
 using RentalSystem.Domain.Entities;
 
 namespace RentalSystem.Application.Services.AutoMapper
@@ -13,7 +13,7 @@ namespace RentalSystem.Application.Services.AutoMapper
 
         private void RequestToDomain()
         {
-            CreateMap<RequestCreateMotoJson, Moto>();
+            CreateMap<RequestCreateMotorcycleJson, Motorcycle>();
         }
     }
 }
