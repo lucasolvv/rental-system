@@ -6,5 +6,6 @@ namespace RentalSystem.Domain.Contracts.MotorcycleContracts
         public Task<IEnumerable<Motorcycle>> GetAllMotorcyclesAsync();
         public Task<bool> MotorcycleAlreadyExists(string placa);
         public Task<Motorcycle> GetMotorcycleByIdAsync(Guid id);
+        public Task<IEnumerable<Motorcycle>> GetMotorcycleByPlateAsync(string placa);
     }
 }

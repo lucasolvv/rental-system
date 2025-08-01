@@ -10,10 +10,25 @@ namespace RentalSystem.Infra.DataAccess.Repositories
 
         public MotorcycleRepository(RentalSystemDbContext context) => _dbContext = context;
 
+
+        public async Task<IEnumerable<Motorcycle>> GetMotorcycleByPlateAsync(string plate)
+        {
+            return await _dbContext.Motorcycles
+                .Where(m => m.LicensePlate.Equals(plate))
+                .ToListAsync();
+        }
+
         public async Task CreateMotorcycleAsync(Motorcycle motorcycle)
         {
             await _dbContext.Motorcycles.AddAsync(motorcycle);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Motorcycle>> GetAllMotorcyclesAsync()
+        {
+            return await _dbContext.Motorcycles
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<bool> MotorcycleAlreadyExists(string plate)
@@ -27,10 +42,6 @@ namespace RentalSystem.Infra.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Motorcycle>> GetAllMotorcyclesAsync()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<Motorcycle> GetMotorcycleByIdAsync(Guid id)
         {

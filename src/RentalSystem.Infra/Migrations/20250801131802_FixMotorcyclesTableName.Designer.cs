@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RentalSystem.Infra.DataAccess;
@@ -11,9 +12,11 @@ using RentalSystem.Infra.DataAccess;
 namespace RentalSystem.Infra.Migrations
 {
     [DbContext(typeof(RentalSystemDbContext))]
-    partial class RentalSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250801131802_FixMotorcyclesTableName")]
+    partial class FixMotorcyclesTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,8 +91,9 @@ namespace RentalSystem.Infra.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("model");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("integer")
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("year");
 
                     b.HasKey("Id");

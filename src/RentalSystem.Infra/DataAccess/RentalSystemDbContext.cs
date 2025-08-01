@@ -16,7 +16,7 @@ namespace RentalSystem.Infra.DataAccess
         {
             modelBuilder.Entity<Motorcycle>(entity =>
             {
-                entity.ToTable("motorcyles");
+                entity.ToTable("motorcycles");
 
                 entity.HasIndex(m => m.LicensePlate).IsUnique();
                 entity.Property(m => m.LicensePlate).HasColumnName("license_plate");

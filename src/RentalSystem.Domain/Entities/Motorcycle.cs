@@ -8,7 +8,7 @@ namespace RentalSystem.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         [Required]
         [MaxLength(100)]
