@@ -2,12 +2,12 @@
 {
     public class MotorcycleNotFoundException : RentalSystemException
     {
-        private readonly string _errorMessage;
-        public MotorcycleNotFoundException(string errorMessage) : base(string.Empty)
+        public string Mensagem { get; set; }
+        public MotorcycleNotFoundException(string mensagem) : base(string.Empty)
         {
-            _errorMessage = errorMessage;
+            Mensagem = mensagem;
         }
-        public override string GetErrorMessage() => _errorMessage;
+        public override string GetErrorMessage() => Mensagem;
         public override System.Net.HttpStatusCode GetStatusCode() => System.Net.HttpStatusCode.NotFound;
     }
 }

@@ -3,14 +3,14 @@
 namespace RentalSystem.Exceptions.ExceptionBase;
 public class ErrorOnValidationException : RentalSystemException
 {
-    private readonly string _errorMessage;
+    private readonly string Mensagem;
 
     public ErrorOnValidationException(string errorMessage) : base(string.Empty)
     {
-        _errorMessage = errorMessage;
+        Mensagem = errorMessage;
     }
 
-    public override string GetErrorMessage() => _errorMessage;
+    public override string GetErrorMessage() => Mensagem;
 
     public override HttpStatusCode GetStatusCode() => HttpStatusCode.BadRequest;
 }
