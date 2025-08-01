@@ -3,3 +3,33 @@ docker-compose up --build -d
 
 # Sobe apenas o banco e mensageria
 docker-compose up postgres rabbitmq -d
+
+
+
+Adicionar no docker-compose quando for subir a app:
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./src/Delivery.WebApi/Dockerfile
+    container_name: rentalsystem_api
+    ports:
+      - "5000:80"
+    depends_on:
+      - postgres
+      - rabbitmq
+
+
+migrations
+na pasta src
+dotnet ef migrations add ChangeTablesName --project RentalSystem.Infra --startup-project RentalSystem.Presentation
+
+dotnet ef database update --project RentalSystem.Infra --startup-project RentalSystem.Presentation
+
+
+rollback
+
+dotnet ef database update NomeDaMigration
+
+
