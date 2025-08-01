@@ -2,6 +2,7 @@
 using RentalSystem.Application.Services.AutoMapper;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
+using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 namespace RentalSystem.Application
 {
     public static class DependencyInjectionExtension
@@ -24,6 +25,7 @@ namespace RentalSystem.Application
         {
             services.AddScoped<ICreateMotorcycleUseCase, CreateMotorcycleUseCase>();
             services.AddScoped<IGetMotorcycleUseCase, GetMotorcycleUseCase>();
+            services.AddScoped<IUpdateMotorcycleUseCase, UpdateMotorcycleUseCase>();
         }
 
     }

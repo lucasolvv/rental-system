@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
-using RentalSystem.Domain.Contracts.MotorcycleContracts;
+using RentalSystem.Domain.Repositories.Motorcycle;
 
 namespace RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases
 {
     public class GetMotorcycleUseCase : IGetMotorcycleUseCase
     {
-        private readonly IMotorcycleReadOnlyContract _motorcycleReadOnlyRepository;
+        private readonly IMotorcycleReadOnlyRepository _motorcycleReadOnlyRepository;
         private readonly IMapper _mapper;
 
-        public GetMotorcycleUseCase(IMotorcycleReadOnlyContract motorcycleReadOnlyRepository, IMapper mapper)
+        public GetMotorcycleUseCase(IMotorcycleReadOnlyRepository motorcycleReadOnlyRepository, IMapper mapper)
         {
             _motorcycleReadOnlyRepository = motorcycleReadOnlyRepository;
             _mapper = mapper;

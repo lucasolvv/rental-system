@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
-using RentalSystem.Communication.Responses;
+using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.Motorcycles;
+using RentalSystem.Communication.Responses;
 
 namespace RentalSystem.Presentation.Controllers
 {
@@ -27,5 +28,16 @@ namespace RentalSystem.Presentation.Controllers
 
             return Ok(motorcycles);
         }
+
+        [HttpPut("/motos/{id}/placa")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateMotorcycle([FromRoute] Guid id, [FromBody] RequestGetMotorcycleByPlateJson newPlate, 
+            [FromServices] IUpdateMotorcycleUseCase useCase)
+        {
+            await useCase.ExecuteAsync(id, newPlate.Placa);
+            return Ok(new ResponseSuccessJson("Moto atualizada com sucesso!"));
+        }
+
+
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RentalSystem.Domain.Contracts.MotorcycleContracts;
+using RentalSystem.Domain.Repositories.Motorcycle;
+using RentalSystem.Domain.Repositories;
 using RentalSystem.Infra.DataAccess;
 using RentalSystem.Infra.DataAccess.Repositories;
 
@@ -23,8 +24,11 @@ namespace RentalSystem.Infra
 
         private static void AddRepositories(IServiceCollection services)
         {
-            services.AddScoped<IMotorcycleWriteOnlyContract, MotorcycleRepository>();
-            services.AddScoped<IMotorcycleReadOnlyContract, MotorcycleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IMotorcycleWriteOnlyrRepository, MotorcycleRepository>();
+            services.AddScoped<IMotorcycleReadOnlyRepository, MotorcycleRepository>();
+            services.AddScoped<IMotorcycleUpdateOnlyRepository, MotorcycleRepository>();
         }
 
     }

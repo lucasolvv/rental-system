@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RentalSystem.Domain.Contracts.MotorcycleContracts;
+using RentalSystem.Domain.Repositories.Motorcycle;
 using RentalSystem.Domain.Entities;
 
 namespace RentalSystem.Infra.DataAccess.Repositories
 {
-    public class MotorcycleRepository : IMotorcycleReadOnlyContract, IMotorcycleWriteOnlyContract
+    public class MotorcycleRepository : IMotorcycleReadOnlyRepository, IMotorcycleWriteOnlyrRepository, IMotorcycleUpdateOnlyRepository
     {
         private readonly RentalSystemDbContext _dbContext;
 
@@ -21,7 +21,6 @@ namespace RentalSystem.Infra.DataAccess.Repositories
         public async Task CreateMotorcycleAsync(Motorcycle motorcycle)
         {
             await _dbContext.Motorcycles.AddAsync(motorcycle);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Motorcycle>> GetAllMotorcyclesAsync()
@@ -37,15 +36,24 @@ namespace RentalSystem.Infra.DataAccess.Repositories
             return exists;
         }
 
+        public void UpdateMotorcycle(Motorcycle motorcycle)
+        {
+            _dbContext.Motorcycles.Update(motorcycle);
+        }
+
+        
+
         public Task DeleteMotorcycleByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
 
-        public Task<Motorcycle> GetMotorcycleByIdAsync(Guid id)
+        public async Task<Motorcycle> GetMotorcycleByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Motorcycles
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public Task UpdatePlateByIdAsync(Guid id, string newPlate)
