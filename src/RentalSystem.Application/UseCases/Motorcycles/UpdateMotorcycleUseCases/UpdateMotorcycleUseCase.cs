@@ -20,7 +20,7 @@ namespace RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases
         {
             var motorcycle = await _repository.GetMotorcycleByIdAsync(id);
             if (motorcycle == null)
-                throw new ErrorOnValidationException($"Não encontramos nenhuma moto em nossa base com o ID {id}.");
+                throw new MotorcycleNotFoundException($"Não encontramos nenhuma moto em nossa base com o ID {id}.");
             
             motorcycle.LicensePlate = newPlate;
             _repository.UpdateMotorcycle(motorcycle);

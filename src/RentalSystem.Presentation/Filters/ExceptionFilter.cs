@@ -23,7 +23,7 @@ namespace RentalSystem.Presentation.Filters
 
         private static void ThrowUnknowException(ExceptionContext context)
         {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.Result = new ObjectResult(new ResponseErrorJson("An unknown error occurred."));
         }
     }

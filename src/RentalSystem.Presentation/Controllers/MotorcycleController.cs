@@ -21,7 +21,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpGet("/motos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllMotorcycles([FromServices] IGetMotorcycleUseCase useCase, 
+        public async Task<IActionResult> GetAllMotorcycles([FromServices] IGetMotorcycleUseCase useCase,
             [FromQuery] RequestGetMotorcycleByPlateJson request)
         {
             var motorcycles = await useCase.ExecuteAsync(request);
@@ -31,13 +31,20 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpPut("/motos/{id}/placa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateMotorcycle([FromRoute] Guid id, [FromBody] RequestGetMotorcycleByPlateJson newPlate, 
+        public async Task<IActionResult> UpdateMotorcycle([FromRoute] Guid id, [FromBody] RequestGetMotorcycleByPlateJson newPlate,
             [FromServices] IUpdateMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(id, newPlate.Placa);
             return Ok(new ResponseSuccessJson("Moto atualizada com sucesso!"));
         }
 
+        [HttpGet("/motos/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetMotorcycleById([FromRoute] Guid id, [FromServices] IGetMotorcycleUseCase useCase)
+        {
+            var motorcycle = await useCase.GetMotorcycleByIdAsync(id);
+            return Ok(motorcycle);
 
+        }
     }
 }
