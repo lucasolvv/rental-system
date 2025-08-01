@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RentalSystem.Communication.Requests.Motorcycle;
+using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Domain.Contracts.MotorcycleContracts;
 using RentalSystem.Domain.Entities;
 using RentalSystem.Exceptions.ExceptionBase;
