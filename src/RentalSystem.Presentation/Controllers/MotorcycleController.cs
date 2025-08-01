@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
-using RentalSystem.Communication.Requests.Motorcycle;
+using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
+using RentalSystem.Communication.Responses;
+using RentalSystem.Communication.Requests.Motorcycles;
 
 namespace RentalSystem.Presentation.Controllers
 {
@@ -14,6 +16,16 @@ namespace RentalSystem.Presentation.Controllers
         {
             await useCase.ExecuteAsync(request);
             return Created();
+        }
+
+        [HttpGet("/motos")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllMotorcycles([FromServices] IGetMotorcycleUseCase useCase, 
+            [FromQuery] RequestGetMotorcycleByPlateJson request)
+        {
+            var motorcycles = await useCase.ExecuteAsync(request);
+
+            return Ok(motorcycles);
         }
     }
 }
