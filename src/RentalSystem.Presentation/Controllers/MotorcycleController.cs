@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
+using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.Motorcycles;
@@ -45,6 +46,14 @@ namespace RentalSystem.Presentation.Controllers
             var motorcycle = await useCase.GetMotorcycleByIdAsync(id);
             return Ok(motorcycle);
 
+        }
+
+        [HttpDelete("/motos/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteMotorcycle([FromRoute] Guid id, [FromServices] IDeleteMotorcycleUseCase useCase)
+        {
+            await useCase.ExecuteAsync(id);
+            return Ok();
         }
     }
 }

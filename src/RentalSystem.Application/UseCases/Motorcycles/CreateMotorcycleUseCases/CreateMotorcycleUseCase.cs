@@ -8,12 +8,12 @@ namespace RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases
 {
     public class CreateMotorcycleUseCase : ICreateMotorcycleUseCase
     {
-        private readonly IMotorcycleWriteOnlyrRepository _motorcycleWriteRepository;
+        private readonly IMotorcycleWriteOnlyRepository _motorcycleWriteRepository;
         private readonly IMotorcycleReadOnlyRepository _motorcycleReadOnlyRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateMotorcycleUseCase(IMotorcycleWriteOnlyrRepository motorcycleWriteRepository, 
+        public CreateMotorcycleUseCase(IMotorcycleWriteOnlyRepository motorcycleWriteRepository, 
                                  IMotorcycleReadOnlyRepository motorcycleReadOnlyRepository, 
                                  IMapper mapper,
                                  IUnitOfWork unitOfWork)

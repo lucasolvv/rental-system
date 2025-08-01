@@ -26,9 +26,10 @@ namespace RentalSystem.Infra
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IMotorcycleWriteOnlyrRepository, MotorcycleRepository>();
+            services.AddScoped<IMotorcycleWriteOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleReadOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleUpdateOnlyRepository, MotorcycleRepository>();
+            services.AddScoped<IMotorcycleDeleteOnlyRepository, MotorcycleRepository>();
         }
 
     }

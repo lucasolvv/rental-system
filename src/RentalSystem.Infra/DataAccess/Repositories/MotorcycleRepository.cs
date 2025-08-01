@@ -4,7 +4,7 @@ using RentalSystem.Domain.Entities;
 
 namespace RentalSystem.Infra.DataAccess.Repositories
 {
-    public class MotorcycleRepository : IMotorcycleReadOnlyRepository, IMotorcycleWriteOnlyrRepository, IMotorcycleUpdateOnlyRepository
+    public class MotorcycleRepository : IMotorcycleReadOnlyRepository, IMotorcycleWriteOnlyRepository, IMotorcycleUpdateOnlyRepository, IMotorcycleDeleteOnlyRepository
     {
         private readonly RentalSystemDbContext _dbContext;
 
@@ -41,11 +41,13 @@ namespace RentalSystem.Infra.DataAccess.Repositories
             _dbContext.Motorcycles.Update(motorcycle);
         }
 
-        
 
-        public Task DeleteMotorcycleByIdAsync(Guid id)
+        public async Task DeleteMotorcycle(Guid id)
         {
-            throw new NotImplementedException();
+            var motorcycle = await _dbContext.Motorcycles.FirstOrDefaultAsync(motorcycle => motorcycle.Id == id);
+            if (motorcycle is null)
+                return;
+            _dbContext.Motorcycles.Remove(motorcycle);
         }
 
 
