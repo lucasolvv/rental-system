@@ -6,5 +6,6 @@ namespace RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases
     public interface IGetMotorcycleUseCase
     {
         Task<IEnumerable<ResponseGetMotorcycleJson>> ExecuteAsync(RequestGetMotorcycleByPlateJson request);
+        Task<ResponseGetMotorcycleJson> GetMotorcycleByIdAsync(Guid id);
     }
 }

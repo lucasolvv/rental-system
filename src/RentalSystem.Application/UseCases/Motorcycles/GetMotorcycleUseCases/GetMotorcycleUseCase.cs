@@ -2,6 +2,7 @@
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
 using RentalSystem.Domain.Repositories.Motorcycle;
+using RentalSystem.Exceptions.ExceptionBase;
 
 namespace RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases
 {
@@ -27,6 +28,13 @@ namespace RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases
             var motorcycles = await _motorcycleReadOnlyRepository.GetMotorcycleByPlateAsync(request.Placa);
             return _mapper.Map<IEnumerable<ResponseGetMotorcycleJson>>(motorcycles);
 
+        }
+
+        public async Task<ResponseGetMotorcycleJson> GetMotorcycleByIdAsync(Guid id)
+        {
+            var motorcycle = await _motorcycleReadOnlyRepository.GetMotorcycleByIdAsync(id);
+            if (motorcycle == null) throw new MotorcycleNotFoundException($"Não encontramos nenhuma moto em nossa base com o ID {id}.");
+            return _mapper.Map<ResponseGetMotorcycleJson>(motorcycle);
         }
     }
 }
