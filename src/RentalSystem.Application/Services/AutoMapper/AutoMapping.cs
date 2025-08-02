@@ -25,9 +25,9 @@ namespace RentalSystem.Application.Services.AutoMapper
             CreateMap<RequestCreateDeliveryDriverJson, DeliveryDriver>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Nome))
                 .ForMember(dest => dest.Cnpj, opt => opt.MapFrom(src => src.Cnpj))
-                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.DataNascimento))
-                .ForMember(dest => dest.Cnh, opt => opt.MapFrom(src => src.NumeroCnh))
-                .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.TipoCnh));
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.Data_nascimento))
+                .ForMember(dest => dest.Cnh, opt => opt.MapFrom(src => src.Numero_cnh))
+                .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.Tipo_cnh));
         }
 
         private void DomainToResponse()
