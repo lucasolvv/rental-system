@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using RentalSystem.Communication.Requests.DeliveryDriver;
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
 using RentalSystem.Domain.Entities;
+using System.Net.NetworkInformation;
 
 namespace RentalSystem.Application.Services.AutoMapper
 {
@@ -19,6 +21,13 @@ namespace RentalSystem.Application.Services.AutoMapper
                 .ForMember(dest => dest.Year, opt => opt.MapFrom(src => src.Ano))
                 .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Modelo))
                 .ForMember(dest => dest.LicensePlate, opt => opt.MapFrom(src => src.Placa));
+
+            CreateMap<RequestCreateDeliveryDriverJson, DeliveryDriver>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.Cnpj, opt => opt.MapFrom(src => src.Cnpj))
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.DataNascimento))
+                .ForMember(dest => dest.Cnh, opt => opt.MapFrom(src => src.NumeroCnh))
+                .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.TipoCnh));
         }
 
         private void DomainToResponse()

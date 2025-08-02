@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RentalSystem.Application.Services.AutoMapper;
+using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
@@ -24,10 +25,14 @@ namespace RentalSystem.Application
 
         private static void AddUseCases(IServiceCollection services)
         {
+            // motorcycles
             services.AddScoped<ICreateMotorcycleUseCase, CreateMotorcycleUseCase>();
             services.AddScoped<IGetMotorcycleUseCase, GetMotorcycleUseCase>();
             services.AddScoped<IUpdateMotorcycleUseCase, UpdateMotorcycleUseCase>();
             services.AddScoped<IDeleteMotorcycleUseCase, DeleteMotorcycleUseCase>();
+
+            // delivery drivers
+            services.AddScoped<ICreateDeliveryDriverUseCase, CreateDeliveryDriverUseCase>();
         }
 
     }
