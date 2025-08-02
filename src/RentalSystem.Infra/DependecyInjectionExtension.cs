@@ -5,6 +5,7 @@ using RentalSystem.Domain.Repositories.Motorcycle;
 using RentalSystem.Domain.Repositories;
 using RentalSystem.Infra.DataAccess;
 using RentalSystem.Infra.DataAccess.Repositories;
+using RentalSystem.Domain.Repositories.DeliveryDriver;
 
 namespace RentalSystem.Infra
 {
@@ -26,10 +27,15 @@ namespace RentalSystem.Infra
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            // motorcycles
             services.AddScoped<IMotorcycleWriteOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleReadOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleUpdateOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleDeleteOnlyRepository, MotorcycleRepository>();
+
+            // delivery drivers
+            services.AddScoped<IDeliveryDriverWriteOnlyRepository, DeliveryDriverRepository>();
+            services.AddScoped<IDeliveryDriverReadOnlyRepository, DeliveryDriverRepository>();
         }
 
     }
