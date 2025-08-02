@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RentalSystem.Application.Services.AutoMapper;
+using RentalSystem.Application.Services.FileStorage;
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
@@ -25,6 +26,9 @@ namespace RentalSystem.Application
 
         private static void AddUseCases(IServiceCollection services)
         {
+            // file storage 
+            services.AddScoped<IFileStorageService, FileStorageService>();
+
             // motorcycles
             services.AddScoped<ICreateMotorcycleUseCase, CreateMotorcycleUseCase>();
             services.AddScoped<IGetMotorcycleUseCase, GetMotorcycleUseCase>();
