@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/src/RentalSystem.Presentation/Storage/
+# Ignore the Storage folder in the Presentation project
