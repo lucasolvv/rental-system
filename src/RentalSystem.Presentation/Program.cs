@@ -1,5 +1,6 @@
 using RentalSystem.Application;
 using RentalSystem.Infra;
+using RentalSystem.Infra.Messaging.Consumers;
 using RentalSystem.Presentation.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,10 @@ builder.Configuration
 
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
+// hosted services
+builder.Services.AddHostedService<MotorcycleRegisteredConsumer>();
+
 builder.Services.AddInfraDependencies(builder.Configuration);
 builder.Services.AddApplicationDependencies();
 

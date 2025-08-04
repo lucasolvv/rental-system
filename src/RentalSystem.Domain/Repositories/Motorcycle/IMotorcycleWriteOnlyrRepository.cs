@@ -4,6 +4,5 @@ namespace RentalSystem.Domain.Repositories.Motorcycle
     public interface IMotorcycleWriteOnlyRepository
     {
         public Task CreateMotorcycleAsync(Entities.Motorcycle motorcycle);
-        public Task UpdatePlateByIdAsync(Guid id, string newPlate);
     }
 }

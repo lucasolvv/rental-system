@@ -42,7 +42,7 @@ namespace RentalSystem.Infra.DataAccess.Repositories
         }
 
 
-        public async Task DeleteMotorcycle(Guid id)
+        public async Task DeleteMotorcycle(string id)
         {
             var motorcycle = await _dbContext.Motorcycles.FirstOrDefaultAsync(motorcycle => motorcycle.Id == id);
             if (motorcycle is null)
@@ -51,16 +51,11 @@ namespace RentalSystem.Infra.DataAccess.Repositories
         }
 
 
-        public async Task<Motorcycle> GetMotorcycleByIdAsync(Guid id)
+        public async Task<Motorcycle> GetMotorcycleByIdAsync(string id)
         {
             return await _dbContext.Motorcycles
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
-        }
-
-        public Task UpdatePlateByIdAsync(Guid id, string newPlate)
-        {
-            throw new NotImplementedException();
         }
     }
 }

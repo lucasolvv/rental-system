@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RentalSystem.Domain.Repositories.Motorcycle;
+using RentalSystem.Application.Services.Messaging;
 using RentalSystem.Domain.Repositories;
+using RentalSystem.Domain.Repositories.DeliveryDriver;
+using RentalSystem.Domain.Repositories.Motorcycle;
 using RentalSystem.Infra.DataAccess;
 using RentalSystem.Infra.DataAccess.Repositories;
-using RentalSystem.Domain.Repositories.DeliveryDriver;
+using RentalSystem.Infra.Messaging.Consumers;
+using RentalSystem.Infra.Messaging.EventBus;
 
 namespace RentalSystem.Infra
 {
@@ -33,9 +36,14 @@ namespace RentalSystem.Infra
             services.AddScoped<IMotorcycleUpdateOnlyRepository, MotorcycleRepository>();
             services.AddScoped<IMotorcycleDeleteOnlyRepository, MotorcycleRepository>();
 
+            services.AddSingleton<IMessageBusService, RabbitMqService>();
+
+
             // delivery drivers
             services.AddScoped<IDeliveryDriverWriteOnlyRepository, DeliveryDriverRepository>();
             services.AddScoped<IDeliveryDriverReadOnlyRepository, DeliveryDriverRepository>();
+            services.AddScoped<IDeliveryDriverUpdateOnlyRepository, DeliveryDriverRepository>();
+
         }
 
     }

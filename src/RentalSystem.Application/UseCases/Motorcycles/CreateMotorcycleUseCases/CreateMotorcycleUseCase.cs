@@ -4,6 +4,8 @@ using RentalSystem.Domain.Repositories.Motorcycle;
 using RentalSystem.Domain.Entities;
 using RentalSystem.Exceptions.ExceptionBase;
 using RentalSystem.Domain.Repositories;
+using RentalSystem.Application.Services.Messaging;
+using RentalSystem.Domain.Dtos;
 namespace RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases
 {
     public class CreateMotorcycleUseCase : ICreateMotorcycleUseCase
@@ -12,16 +14,19 @@ namespace RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases
         private readonly IMotorcycleReadOnlyRepository _motorcycleReadOnlyRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMessageBusService _messageBusService;
 
         public CreateMotorcycleUseCase(IMotorcycleWriteOnlyRepository motorcycleWriteRepository, 
                                  IMotorcycleReadOnlyRepository motorcycleReadOnlyRepository, 
                                  IMapper mapper,
-                                 IUnitOfWork unitOfWork)
+                                 IUnitOfWork unitOfWork,
+                                 IMessageBusService messageBusService)
         {
             _motorcycleWriteRepository = motorcycleWriteRepository;
             _motorcycleReadOnlyRepository = motorcycleReadOnlyRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _messageBusService = messageBusService;
         }
 
         public async Task ExecuteAsync(RequestCreateMotorcycleJson request)
@@ -29,8 +34,21 @@ namespace RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases
             await Validate(request);
             
             var motorcycle = _mapper.Map<Motorcycle>(request);
-            
+
             await _motorcycleWriteRepository.CreateMotorcycleAsync(motorcycle);
+
+            if (motorcycle.Year == 2024)
+            {
+                var motorcyleCreatedEvent = new MotorcycleCreatedEvent
+                {
+                    MotorcycleId = motorcycle.Id,
+                    Year = motorcycle.Year,
+                    LicensePlate = motorcycle.LicensePlate
+                };
+
+                _messageBusService.PublishMotorcycleRegisteredEvent(motorcyleCreatedEvent);
+            }
+
             await _unitOfWork.Commit();
         }
 

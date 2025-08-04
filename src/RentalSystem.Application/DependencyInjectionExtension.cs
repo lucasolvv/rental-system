@@ -2,6 +2,7 @@
 using RentalSystem.Application.Services.AutoMapper;
 using RentalSystem.Application.Services.FileStorage;
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
+using RentalSystem.Application.UseCases.DeliveryDrivers.UpdateDriverCnhUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
@@ -37,6 +38,7 @@ namespace RentalSystem.Application
 
             // delivery drivers
             services.AddScoped<ICreateDeliveryDriverUseCase, CreateDeliveryDriverUseCase>();
+            services.AddScoped<IUpdateDriverCnhUseCase, UpdateDriverCnhUseCase>();
         }
 
     }

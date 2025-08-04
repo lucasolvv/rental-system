@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
+using RentalSystem.Application.UseCases.DeliveryDrivers.UpdateDriverCnhUseCases;
+using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.DeliveryDriver;
 
 namespace RentalSystem.Presentation.Controllers
@@ -16,6 +18,15 @@ namespace RentalSystem.Presentation.Controllers
         {
             await useCase.ExecuteAsync(request);
             return Created();
+        }
+
+        [HttpPost("/entregadores/{id}/cnh")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateDriverCnh([FromRoute] string id, [FromBody] RequestUpdateDriverCnhJson request,
+            [FromServices] IUpdateDriverCnhUseCase useCase)
+        {
+            await useCase.ExecuteAsync(id, request);
+            return Ok();
         }
 
         //[HttpGet("/entregadores")]

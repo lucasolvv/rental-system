@@ -2,6 +2,6 @@
 {
     public interface IMotorcycleDeleteOnlyRepository
     {
-        Task DeleteMotorcycle(Guid id);
+        Task DeleteMotorcycle(string id);
     }
 }
