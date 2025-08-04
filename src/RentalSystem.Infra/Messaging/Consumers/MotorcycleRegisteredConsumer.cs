@@ -54,7 +54,7 @@ namespace RentalSystem.Infra.Messaging.Consumers
                     {
                         Id = Guid.NewGuid(),
                         MotorcycleId = creationEvent.MotorcycleId,
-                        EventDate = DateTime.UtcNow,
+                        EventDate = DateTime.Now,
                         MessageContent = $"Nova moto cadastrada em nossa base: {message}"
                     };
 

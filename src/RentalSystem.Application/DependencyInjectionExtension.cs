@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RentalSystem.Application.Services.AutoMapper;
 using RentalSystem.Application.Services.FileStorage;
+using RentalSystem.Application.Services.Rental;
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
 using RentalSystem.Application.UseCases.DeliveryDrivers.UpdateDriverCnhUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
+using RentalSystem.Application.UseCases.Rental.CreateRentalUseCases;
 namespace RentalSystem.Application
 {
     public static class DependencyInjectionExtension
@@ -39,6 +41,10 @@ namespace RentalSystem.Application
             // delivery drivers
             services.AddScoped<ICreateDeliveryDriverUseCase, CreateDeliveryDriverUseCase>();
             services.AddScoped<IUpdateDriverCnhUseCase, UpdateDriverCnhUseCase>();
+
+            // rentals
+            services.AddScoped<ICreateRentalUseCase, CreateRentalUseCase>();
+            services.AddScoped<IRentalCostCalculator, RentalCostCalculator>();
         }
 
     }

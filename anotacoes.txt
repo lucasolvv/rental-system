@@ -27,7 +27,7 @@ dotnet ef migrations add ChangeTablesName --project RentalSystem.Infra --startup
 
 dotnet ef database update --project RentalSystem.Infra --startup-project RentalSystem.Presentation
 
-
+dotnet ef database drop --project RentalSystem.Infra --startup-project RentalSystem.Presentation
 rollback
 
 dotnet ef database update NomeDaMigration
@@ -36,6 +36,8 @@ dotnet ef database update NomeDaMigration
 acessando banco de dados no Docker
 
 docker exec -it rentalsystem_postgres psql -U admin -d rentalsystemdb
+
+docker-compose up -d rabbitmq
 
 ✅ Para listar todas as tabelas do banco:
 
