@@ -39,7 +39,8 @@ namespace RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriver
 
             if(!string.IsNullOrWhiteSpace(request.Imagem_cnh))
             {
-                var imageFileName = request.Nome + "_CNH_" + Guid.NewGuid().ToString() + ".jpg";
+                //var imageFileName = request.Nome + "_CNH_" + Guid.NewGuid().ToString();
+                var imageFileName = request.Nome.Split(" ")[0] + "_CNH_" + $"created_{DateTime.Now.Ticks}";
                 var imagePath = await _fileStorage.SaveImageAsync(request.Imagem_cnh, imageFileName);
                 deliveryDriver.LicenseImagePath = imagePath;
             }
