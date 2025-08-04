@@ -8,7 +8,7 @@ namespace RentalSystem.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public Guid MotorcycleId { get; set; }
+        public string MotorcycleId { get; set; }
 
         [Required]
         public DateTime EventDate { get; set; }

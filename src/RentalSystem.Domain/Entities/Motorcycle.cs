@@ -5,7 +5,7 @@ namespace RentalSystem.Domain.Entities
     public class Motorcycle
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public int Year { get; set; }

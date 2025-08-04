@@ -9,10 +9,10 @@ namespace RentalSystem.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public Guid DeliveryDriverId { get; set; }
+        public string DeliveryDriverId { get; set; }
 
         [Required]
-        public Guid MotorcycleId { get; set; }
+        public string MotorcycleId { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

@@ -30,7 +30,7 @@ namespace RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases
 
         }
 
-        public async Task<ResponseGetMotorcycleJson> GetMotorcycleByIdAsync(Guid id)
+        public async Task<ResponseGetMotorcycleJson> GetMotorcycleByIdAsync(string id)
         {
             var motorcycle = await _motorcycleReadOnlyRepository.GetMotorcycleByIdAsync(id);
             if (motorcycle == null) throw new MotorcycleNotFoundException($"Não encontramos nenhuma moto em nossa base com o ID {id}.");

@@ -18,11 +18,13 @@ namespace RentalSystem.Application.Services.AutoMapper
         private void RequestToDomain()
         {
             CreateMap<RequestCreateMotorcycleJson, Motorcycle>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Identificador))
                 .ForMember(dest => dest.Year, opt => opt.MapFrom(src => src.Ano))
                 .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Modelo))
                 .ForMember(dest => dest.LicensePlate, opt => opt.MapFrom(src => src.Placa));
 
             CreateMap<RequestCreateDeliveryDriverJson, DeliveryDriver>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Identificador))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Nome))
                 .ForMember(dest => dest.Cnpj, opt => opt.MapFrom(src => src.Cnpj))
                 .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.Data_nascimento))

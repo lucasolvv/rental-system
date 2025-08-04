@@ -4,6 +4,7 @@ namespace RentalSystem.Communication.Requests.Motorcycles
 {
     public class RequestCreateMotorcycleJson
     {
+        public string Identificador { get; set; }
         public int Ano { get; set; }
         public string Modelo { get; set; }
 

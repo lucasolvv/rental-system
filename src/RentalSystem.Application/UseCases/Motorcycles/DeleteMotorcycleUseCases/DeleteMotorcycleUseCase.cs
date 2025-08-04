@@ -17,7 +17,7 @@ namespace RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases
             _readOnlyRepository = readOnlyRepository;
         }
 
-        public async Task ExecuteAsync(Guid id)
+        public async Task ExecuteAsync(string id)
         {
 
             await Validate(id);
@@ -26,9 +26,9 @@ namespace RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases
         }
 
 
-        private async Task Validate(Guid id)
+        private async Task Validate(string id)
         {
-            if (id == Guid.Empty) 
+            if (string.IsNullOrEmpty(id)) 
                 throw new ErrorOnValidationException($"{id} da moto não pode ser vazio.");
                         
             var motorcycle = await _readOnlyRepository.GetMotorcycleByIdAsync(id);

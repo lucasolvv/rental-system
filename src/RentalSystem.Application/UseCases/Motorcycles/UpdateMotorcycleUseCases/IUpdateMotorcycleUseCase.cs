@@ -4,6 +4,6 @@ namespace RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases
 {
     public interface IUpdateMotorcycleUseCase
     {
-        Task ExecuteAsync(Guid id, string newPlate);
+        Task ExecuteAsync(string id, string newPlate);
     }
 }

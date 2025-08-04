@@ -16,7 +16,7 @@ namespace RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task ExecuteAsync(Guid id, string newPlate)
+        public async Task ExecuteAsync(string id, string newPlate)
         {
             var motorcycle = await _repository.GetMotorcycleByIdAsync(id);
             if (motorcycle == null)

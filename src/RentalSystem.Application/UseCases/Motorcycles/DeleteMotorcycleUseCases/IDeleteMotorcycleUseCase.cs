@@ -2,6 +2,6 @@
 {
     public interface IDeleteMotorcycleUseCase
     {
-        Task ExecuteAsync(Guid id);
+        Task ExecuteAsync(string id);
     }
 }

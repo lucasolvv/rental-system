@@ -32,7 +32,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpPut("/motos/{id}/placa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateMotorcycle([FromRoute] Guid id, [FromBody] RequestGetMotorcycleByPlateJson newPlate,
+        public async Task<IActionResult> UpdateMotorcycle([FromRoute] string id, [FromBody] RequestGetMotorcycleByPlateJson newPlate,
             [FromServices] IUpdateMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(id, newPlate.Placa);
@@ -41,7 +41,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpGet("/motos/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetMotorcycleById([FromRoute] Guid id, [FromServices] IGetMotorcycleUseCase useCase)
+        public async Task<IActionResult> GetMotorcycleById([FromRoute] string id, [FromServices] IGetMotorcycleUseCase useCase)
         {
             var motorcycle = await useCase.GetMotorcycleByIdAsync(id);
             return Ok(motorcycle);
@@ -50,7 +50,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpDelete("/motos/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> DeleteMotorcycle([FromRoute] Guid id, [FromServices] IDeleteMotorcycleUseCase useCase)
+        public async Task<IActionResult> DeleteMotorcycle([FromRoute] string id, [FromServices] IDeleteMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(id);
             return Ok();

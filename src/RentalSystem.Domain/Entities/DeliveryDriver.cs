@@ -5,7 +5,7 @@ namespace RentalSystem.Domain.Entities
     public class DeliveryDriver
     {
         [Key]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(150)]
