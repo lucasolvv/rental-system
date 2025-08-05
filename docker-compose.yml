@@ -1,4 +1,5 @@
 version: '3.9'
+
 services: 
   postgres:
     image: postgres:15
@@ -12,6 +13,11 @@ services:
       - "5432:5432"
     volumes:
       - rentalsystem_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d rentalsystemdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -22,24 +28,27 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: adminrentalsystem
-  
+
   api:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      container_name: rentalsystem_api
-      ports:
-        - "5006:5006"
-        - "7266:7266"
-      depends_on:
-        - postgres
-        - rabbitmq
-      environment:
-        - ASPNETCORE_ENVIRONMENT=Development
-        - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=rentalsystemdb;Username=admin;Password=adminrentalsystem
-        - RabbitMq__Host=rabbitmq
-        - RabbitMq__Port=5672
-        - RabbitMq__Username=admin
-        - RabbitMq__Password=adminrentalsystem
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rentalsystem_api
+    ports:
+      - "5006:5006"
+      - "7266:7266"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=rentalsystemdb;Username=admin;Password=adminrentalsystem
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Port=5672
+      - RabbitMq__Username=admin
+      - RabbitMq__Password=adminrentalsystem
+
 volumes:
   rentalsystem_pgdata:

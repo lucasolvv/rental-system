@@ -24,7 +24,7 @@ namespace RentalSystem.Presentation.Filters
         private static void ThrowUnknowException(ExceptionContext context)
         {
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new ObjectResult(new ResponseErrorJson("An unknown error occurred."));
+            context.Result = new ObjectResult(new ResponseErrorJson(context.Exception.Message));
         }
     }
 }

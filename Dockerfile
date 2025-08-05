@@ -2,11 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Instalar dotnet-ef
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
-
-# Copiar arquivos da solução
+# Copiar arquivos da solução e projetos
 COPY *.sln ./
 COPY src/RentalSystem.Presentation/RentalSystem.Presentation.csproj ./src/RentalSystem.Presentation/
 COPY src/RentalSystem.Application/RentalSystem.Application.csproj ./src/RentalSystem.Application/
@@ -20,19 +16,18 @@ RUN dotnet restore
 
 # Copiar o restante do código
 COPY src/ ./src/
-COPY shared/ ./shared/  
+COPY shared/ ./shared/
 
-# Copiar o entrypoint
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+# Rodar migrations (criar banco de dados)
+WORKDIR /app/src/RentalSystem.Presentation
 
 # Build da aplicação
-WORKDIR /app/src/RentalSystem.Presentation
 RUN dotnet publish -c Release -o /app/publish
 
 # Etapa de runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["src/RentalSystem.Presentation/entrypoint.sh"]
+ENTRYPOINT ["dotnet", "RentalSystem.Presentation.dll"]
