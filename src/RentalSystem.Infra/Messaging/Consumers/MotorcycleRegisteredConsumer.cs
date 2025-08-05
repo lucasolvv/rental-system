@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
 using RentalSystem.Domain.Dtos;
 using RentalSystem.Domain.Entities;
 using RentalSystem.Infra.DataAccess;
@@ -23,19 +25,37 @@ namespace RentalSystem.Infra.Messaging.Consumers
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost",
+                //HostName = "localhost",
+                HostName = "rabbitmq",
                 UserName = "admin",
                 Password = "adminrentalsystem"
             };
 
-            var connection = factory.CreateConnection();
+            IConnection connection = null;
+
+            // Retry para tentar se conectar com o RabbitMQ
+            var policy = Policy
+                .Handle<BrokerUnreachableException>()
+                .WaitAndRetry(5, retryAttempt =>
+                {
+                    Console.WriteLine($"[RabbitMQ Retry] Tentativa {retryAttempt} falhou. Tentando novamente em 5 segundos...");
+                    return TimeSpan.FromSeconds(5);
+                });
+
+            policy.Execute(() =>
+            {
+                connection = factory.CreateConnection();
+                Console.WriteLine("[RabbitMQ] Conexão estabelecida com sucesso.");
+            });
+
             var channel = connection.CreateModel();
 
-            channel.QueueDeclare(queue: "motorcycle_registered_events",
-                                 durable: false,
-                                 exclusive: false,
-                                 autoDelete: false,
-                                 arguments: null);
+            channel.QueueDeclare(
+                queue: "motorcycle_registered_events",
+                durable: false,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
 
             var consumer = new EventingBasicConsumer(channel);
 
@@ -45,7 +65,7 @@ namespace RentalSystem.Infra.Messaging.Consumers
                 var message = Encoding.UTF8.GetString(body);
                 var creationEvent = JsonSerializer.Deserialize<MotorcycleCreatedEvent>(message);
 
-                if (creationEvent.Year == 2024)
+                if (creationEvent?.Year == 2024)
                 {
                     using var scope = _serviceProvider.CreateScope();
                     var db = scope.ServiceProvider.GetRequiredService<RentalSystemDbContext>();
@@ -62,7 +82,12 @@ namespace RentalSystem.Infra.Messaging.Consumers
                     await db.SaveChangesAsync();
                 }
             };
-            channel.BasicConsume(queue: "motorcycle_registered_events", autoAck: true, consumer: consumer);
+
+            channel.BasicConsume(
+                queue: "motorcycle_registered_events",
+                autoAck: true,
+                consumer: consumer);
+
             return Task.CompletedTask;
         }
     }
