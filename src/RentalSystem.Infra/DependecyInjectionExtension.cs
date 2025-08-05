@@ -48,6 +48,7 @@ namespace RentalSystem.Infra
             // rentals 
             services.AddScoped<IRentalWriteOnlyRepository, RentalRepository>();
             services.AddScoped<IRentalReadOnlyRepository, RentalRepository>();
+            services.AddScoped<IRentalUpdateOnlyRepository, RentalRepository>();
 
         }
 
