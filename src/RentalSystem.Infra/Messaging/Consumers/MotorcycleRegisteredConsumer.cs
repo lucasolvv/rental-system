@@ -25,8 +25,8 @@ namespace RentalSystem.Infra.Messaging.Consumers
         {
             var factory = new ConnectionFactory()
             {
-                //HostName = "localhost",
-                HostName = "rabbitmq",
+                HostName = "localhost",
+                //HostName = "rabbitmq",
                 UserName = "admin",
                 Password = "adminrentalsystem"
             };
@@ -74,7 +74,7 @@ namespace RentalSystem.Infra.Messaging.Consumers
                     {
                         Id = Guid.NewGuid(),
                         MotorcycleId = creationEvent.MotorcycleId,
-                        EventDate = DateTime.Now,
+                        EventDate = DateTime.UtcNow,
                         MessageContent = $"Nova moto cadastrada em nossa base: {message}"
                     };
 

@@ -10,12 +10,12 @@ using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
 {
-    [DisplayName("motos")]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("motos")]
+    [DisplayName("Motos")]
     public class MotorcycleController : ControllerBase
     {
-        [HttpPost("/motos")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateMotorcycle([FromBody] RequestCreateMotorcycleJson request, [FromServices] ICreateMotorcycleUseCase useCase)
         {
@@ -23,7 +23,7 @@ namespace RentalSystem.Presentation.Controllers
             return Created();
         }
 
-        [HttpGet("/motos")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllMotorcycles([FromServices] IGetMotorcycleUseCase useCase,
             [FromQuery] RequestGetMotorcycleByPlateJson request)
@@ -33,7 +33,7 @@ namespace RentalSystem.Presentation.Controllers
             return Ok(motorcycles);
         }
 
-        [HttpPut("/motos/{id}/placa")]
+        [HttpPut("{id}/placa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateMotorcycle([FromRoute] string id, [FromBody] RequestGetMotorcycleByPlateJson newPlate,
             [FromServices] IUpdateMotorcycleUseCase useCase)
@@ -42,7 +42,7 @@ namespace RentalSystem.Presentation.Controllers
             return Ok(new ResponseSuccessJson("Moto atualizada com sucesso!"));
         }
 
-        [HttpGet("/motos/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetMotorcycleById([FromRoute] string id, [FromServices] IGetMotorcycleUseCase useCase)
         {
@@ -51,7 +51,7 @@ namespace RentalSystem.Presentation.Controllers
 
         }
 
-        [HttpDelete("/motos/{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteMotorcycle([FromRoute] string id, [FromServices] IDeleteMotorcycleUseCase useCase)
         {

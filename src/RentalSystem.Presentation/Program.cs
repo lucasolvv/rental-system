@@ -51,7 +51,7 @@ builder.Services.AddInfraDependencies(builder.Configuration);
 builder.Services.AddApplicationDependencies();
 
 // Comentar pra rodar localmente
-builder.WebHost.UseUrls("http://0.0.0.0:5006");
+//builder.WebHost.UseUrls("http://0.0.0.0:5006");
 
 var app = builder.Build();
 

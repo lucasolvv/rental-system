@@ -9,12 +9,12 @@ using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
 {
-    [DisplayName("locação")]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("locações")]
+    [DisplayName("Locações")]
     public class DeliveryDriversController : ControllerBase
     {
-        [HttpPost("/locacao")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateMotorcycleRental([FromBody] RequestCreateMotorcycleRentalJson request, [FromServices] ICreateRentalUseCase useCase)
         {
@@ -22,7 +22,7 @@ namespace RentalSystem.Presentation.Controllers
             return Created();
         }
 
-        [HttpGet("/locacao")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllRentals([FromServices] IGetRentalUseCase useCase)
         {
@@ -30,7 +30,7 @@ namespace RentalSystem.Presentation.Controllers
             return Ok(rentals);
         }
 
-        [HttpGet("/locacao/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRentalById([FromRoute] string id, [FromServices] IGetRentalUseCase useCase)
         {
@@ -38,7 +38,7 @@ namespace RentalSystem.Presentation.Controllers
             return Ok(rental);
         }
 
-        [HttpPut("/locacao/{id}/devolucao")]
+        [HttpPut("{id}/devolucao")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ReturnRental([FromRoute] string id, [FromBody] RequestRentalReturnJson requestRentalReturnJson, [FromServices] IRentalReturnUseCase useCase)
         {

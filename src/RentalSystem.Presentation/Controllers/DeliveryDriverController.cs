@@ -6,12 +6,12 @@ using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
 {
-    [DisplayName("entregadores")]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("entregadores")]
+    [DisplayName("Entregadores")]
     public class DeliveryDriverController : ControllerBase
     {
-        [HttpPost("/entregadores")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateDeliveryDriver([FromBody] RequestCreateDeliveryDriverJson request,
             [FromServices] ICreateDeliveryDriverUseCase useCase)
@@ -20,7 +20,7 @@ namespace RentalSystem.Presentation.Controllers
             return Created();
         }
 
-        [HttpPost("/entregadores/{id}/cnh")]
+        [HttpPost("{id}/cnh")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateDriverCnh([FromRoute] string id, [FromBody] RequestUpdateDriverCnhJson request,
             [FromServices] IUpdateDriverCnhUseCase useCase)

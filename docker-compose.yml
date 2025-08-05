@@ -29,26 +29,5 @@ services:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: adminrentalsystem
 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: rentalsystem_api
-    ports:
-      - "5006:5006"
-      - "7266:7266"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_started
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=rentalsystemdb;Username=admin;Password=adminrentalsystem
-      - RabbitMq__Host=rabbitmq
-      - RabbitMq__Port=5672
-      - RabbitMq__Username=admin
-      - RabbitMq__Password=adminrentalsystem
-
 volumes:
   rentalsystem_pgdata:
