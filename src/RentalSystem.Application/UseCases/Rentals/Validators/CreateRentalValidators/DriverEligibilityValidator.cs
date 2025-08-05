@@ -1,7 +1,7 @@
 ﻿using RentalSystem.Domain.Repositories.DeliveryDriver;
 using RentalSystem.Exceptions.ExceptionBase;
 
-namespace RentalSystem.Application.UseCases.Rental.Validators.CreateRentalValidators
+namespace RentalSystem.Application.UseCases.Rentals.Validators.CreateRentalValidators
 {
     public class DriverEligibilityValidator
     {

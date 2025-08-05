@@ -5,6 +5,7 @@ using RentalSystem.Application.Services.Messaging;
 using RentalSystem.Domain.Repositories;
 using RentalSystem.Domain.Repositories.DeliveryDriver;
 using RentalSystem.Domain.Repositories.Motorcycle;
+using RentalSystem.Domain.Repositories.Rental;
 using RentalSystem.Infra.DataAccess;
 using RentalSystem.Infra.DataAccess.Repositories;
 using RentalSystem.Infra.Messaging.Consumers;
@@ -43,6 +44,10 @@ namespace RentalSystem.Infra
             services.AddScoped<IDeliveryDriverWriteOnlyRepository, DeliveryDriverRepository>();
             services.AddScoped<IDeliveryDriverReadOnlyRepository, DeliveryDriverRepository>();
             services.AddScoped<IDeliveryDriverUpdateOnlyRepository, DeliveryDriverRepository>();
+
+            // rentals 
+            services.AddScoped<IRentalWriteOnlyRepository, RentalRepository>();
+            services.AddScoped<IRentalReadOnlyRepository, RentalRepository>();
 
         }
 

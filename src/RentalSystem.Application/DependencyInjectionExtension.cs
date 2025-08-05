@@ -8,7 +8,9 @@ using RentalSystem.Application.UseCases.Motorcycles.CreateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.DeleteMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
-using RentalSystem.Application.UseCases.Rental.CreateRentalUseCases;
+using RentalSystem.Application.UseCases.Rentals.CreateRentalUseCases;
+using RentalSystem.Application.UseCases.Rentals.GetRentalUseCases;
+using RentalSystem.Application.UseCases.Rentals.Validators.CreateRentalValidators;
 namespace RentalSystem.Application
 {
     public static class DependencyInjectionExtension
@@ -21,10 +23,8 @@ namespace RentalSystem.Application
 
         private static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddScoped(option => new AutoMapper.MapperConfiguration(option =>
-            {
-                option.AddProfile(new AutoMapping());
-            }).CreateMapper());
+            services.AddAutoMapper(typeof(AutoMapping));
+
         }
 
         private static void AddUseCases(IServiceCollection services)
@@ -45,6 +45,12 @@ namespace RentalSystem.Application
             // rentals
             services.AddScoped<ICreateRentalUseCase, CreateRentalUseCase>();
             services.AddScoped<IRentalCostCalculator, RentalCostCalculator>();
+            services.AddScoped<IGetRentalUseCase, GetRentalUseCase>();
+
+            services.AddScoped<DriverEligibilityValidator>();
+            services.AddScoped<RentalPeriodValidator>();
+            services.AddScoped<RentalPlanValidator>();
+
         }
 
     }

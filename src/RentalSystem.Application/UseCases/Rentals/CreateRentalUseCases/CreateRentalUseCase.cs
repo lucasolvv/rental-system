@@ -1,11 +1,10 @@
 ﻿using RentalSystem.Communication.Requests.Rental;
-using RentalSystem.Application.UseCases.Rental.Validators;
-using RentalSystem.Application.UseCases.Rental.Validators.CreateRentalValidators;
+using RentalSystem.Application.UseCases.Rentals.Validators.CreateRentalValidators;
 using RentalSystem.Domain.Repositories.Rental;
 using AutoMapper;
 using RentalSystem.Application.Services.Rental;
 using RentalSystem.Domain.Repositories;
-namespace RentalSystem.Application.UseCases.Rental.CreateRentalUseCases
+namespace RentalSystem.Application.UseCases.Rentals.CreateRentalUseCases
 {
     public class CreateRentalUseCase : ICreateRentalUseCase
     {

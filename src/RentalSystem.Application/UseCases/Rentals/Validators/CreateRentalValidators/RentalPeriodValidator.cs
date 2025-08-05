@@ -1,12 +1,12 @@
 ﻿using RentalSystem.Exceptions.ExceptionBase;
 
-namespace RentalSystem.Application.UseCases.Rental.Validators.CreateRentalValidators
+namespace RentalSystem.Application.UseCases.Rentals.Validators.CreateRentalValidators
 {
     public class RentalPeriodValidator
     { 
-        public void Validate(DateTimeOffset startDate, DateTimeOffset endDate, DateTimeOffset expectedEndDate)
+        public void Validate(DateTime startDate, DateTime endDate, DateTime expectedEndDate)
         {
-            var today = DateTimeOffset.UtcNow.Date;
+            var today = DateTime.UtcNow.Date;
             var minimumStartDate = today.AddDays(1);
 
             if (startDate.Date != minimumStartDate)

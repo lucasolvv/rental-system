@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RentalSystem.Infra.DataAccess;
@@ -11,9 +12,11 @@ using RentalSystem.Infra.DataAccess;
 namespace RentalSystem.Infra.Migrations
 {
     [DbContext(typeof(RentalSystemDbContext))]
-    partial class RentalSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250805000441_ChangeRentalIdCollType")]
+    partial class ChangeRentalIdCollType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

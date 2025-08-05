@@ -30,8 +30,8 @@ namespace RentalSystem.Application.Services.Rental
 
         public decimal CalculateTotalWithReturn(
             int planDays,
-            DateTimeOffset expectedEndDate,
-            DateTimeOffset actualEndDate
+            DateTime expectedEndDate,
+            DateTime actualEndDate
             )
         {
             var dailyRate = GetDailyRate(planDays);

@@ -1,6 +1,6 @@
 ﻿using RentalSystem.Communication.Requests.Rental;
 
-namespace RentalSystem.Application.UseCases.Rental.CreateRentalUseCases
+namespace RentalSystem.Application.UseCases.Rentals.CreateRentalUseCases
 {
     public interface ICreateRentalUseCase
     {
