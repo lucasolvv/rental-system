@@ -113,9 +113,9 @@ RentalSystem
 
 ## 📌 Observações
 
-- A imagem da CNH é salva no diretório local `Storage/CNH` dentro do container.
+- A imagem da CNH é salva no diretório local `Storage/CNH` dentro do container na camada de presentation da aplicação.
 - A aplicação usa AutoMapper, injeção de dependência com `IServiceCollection` e HostedService para o consumidor RabbitMQ.
-- As validações de negócio estão centralizadas nos Use Cases.
+- As validações de negócio estão centralizadas nos Use Cases, algumas chamam outras classes "validator" pra casos de regras mais extensas.
 - O projeto utiliza padrões DDD, SOLID e arquitetura em camadas (clean architecture).
 
 ---
@@ -125,9 +125,9 @@ RentalSystem
 Caso deseje entrar em contato comigo:
 
 **Lucas Oliveira**  
-Email: _[coloque seu e-mail aqui]_  
-LinkedIn: _[coloque seu link se quiser]_  
-GitHub: _[coloque o link do repositório final aqui]_
+Email: lucasoliveir.tech@gmail.com  
+LinkedIn: https://www.linkedin.com/in/lucas-oliveira-tech/
+GitHub: https://github.com/lucasolvv?tab=repositories
 
 ---
 
@@ -144,5 +144,6 @@ GitHub: _[coloque o link do repositório final aqui]_
 | Devolução com multa/adicionais         | ✅ Concluído |
 | Publicação e consumo de evento Rabbit  | ✅ Concluído |
 | Testes unitários                       | ❌ Não implementado |
+| Testes de Integração                       | ❌ Não implementado |
 | Logs estruturados                      | ❌ Não implementado |
 | Documentação via Swagger               | ✅ Concluído |
