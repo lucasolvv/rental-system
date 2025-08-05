@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
 using RentalSystem.Application.UseCases.DeliveryDrivers.UpdateDriverCnhUseCases;
-using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.DeliveryDriver;
+using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
 {
+    [DisplayName("entregadores")]
     [Route("api/[controller]")]
     [ApiController]
     public class DeliveryDriverController : ControllerBase
@@ -28,13 +28,5 @@ namespace RentalSystem.Presentation.Controllers
             await useCase.ExecuteAsync(id, request);
             return Ok();
         }
-
-        //[HttpGet("/entregadores")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<IActionResult> GetAllDeliveryDrivers([FromServices] IGetDeliveryDriverUseCase useCase)
-        //{
-        //    var drivers = await useCase.ExecuteAsync();
-        //    return Ok(drivers);
-        //}
     }
 }
