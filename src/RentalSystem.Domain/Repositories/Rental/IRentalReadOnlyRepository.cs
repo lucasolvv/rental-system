@@ -2,7 +2,8 @@
 {
     public interface IRentalReadOnlyRepository
     {
-        Task<IEnumerable<Domain.Entities.Rental>> GetAllRentalsAsync();
-        Task<Domain.Entities.Rental> GetRentalByIdAsync(string id);
+        Task<IEnumerable<Entities.Rental>> GetAllRentalsAsync();
+        Task<Entities.Rental> GetRentalByIdAsync(string id);
+        Task<bool> GetRentalByMotorcycleIdAsync(string motorcycleId);
     }
 }
