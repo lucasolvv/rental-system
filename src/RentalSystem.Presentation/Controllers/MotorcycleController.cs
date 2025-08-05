@@ -5,6 +5,7 @@ using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
+using RentalSystem.Exceptions.ExceptionBase;
 using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
@@ -16,6 +17,7 @@ namespace RentalSystem.Presentation.Controllers
     {
         [HttpPost("/motos")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ErrorOnValidationException), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateMotorcycle([FromBody] RequestCreateMotorcycleJson request, [FromServices] ICreateMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(request);
