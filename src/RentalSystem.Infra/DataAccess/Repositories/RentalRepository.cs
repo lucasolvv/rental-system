@@ -5,7 +5,7 @@ using RentalSystem.Domain.Repositories.Rental;
 
 namespace RentalSystem.Infra.DataAccess.Repositories
 {
-    public class RentalRepository : IRentalWriteOnlyRepository, IRentalReadOnlyRepository
+    public class RentalRepository : IRentalWriteOnlyRepository, IRentalReadOnlyRepository, IRentalUpdateOnlyRepository
     {
         private readonly RentalSystemDbContext _dbContext;
 
@@ -29,6 +29,19 @@ namespace RentalSystem.Infra.DataAccess.Repositories
                 .Include(r => r.Motorcycle)
                 .Include(r => r.DeliveryDriver)
                 .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<bool> GetRentalByMotorcycleIdAsync(string motorcycleId)
+        {
+            return await _dbContext.Rentals
+                .Include(r => r.Motorcycle)
+                .Include(r => r.DeliveryDriver)
+                .AnyAsync(r => r.MotorcycleId == motorcycleId);
+        }
+
+        public async Task UpdateAsync(Rental rental)
+        {
+            _dbContext.Rentals.Update(rental);
         }
     }
 }
