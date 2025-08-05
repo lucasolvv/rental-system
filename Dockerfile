@@ -35,4 +35,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["src/RentalSystem.Presentation/entrypoint.sh"]
