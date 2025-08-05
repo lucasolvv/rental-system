@@ -5,9 +5,11 @@ using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
+using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
 {
+    [DisplayName("motos")]
     [Route("api/[controller]")]
     [ApiController]
     public class MotorcycleController : ControllerBase
