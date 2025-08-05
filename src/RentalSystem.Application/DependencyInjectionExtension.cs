@@ -10,7 +10,9 @@ using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Rentals.CreateRentalUseCases;
 using RentalSystem.Application.UseCases.Rentals.GetRentalUseCases;
+using RentalSystem.Application.UseCases.Rentals.RentalReturnUseCases;
 using RentalSystem.Application.UseCases.Rentals.Validators.CreateRentalValidators;
+using RentalSystem.Application.UseCases.Rentals.Validators.ReturnRentalValidators;
 namespace RentalSystem.Application
 {
     public static class DependencyInjectionExtension
@@ -46,10 +48,12 @@ namespace RentalSystem.Application
             services.AddScoped<ICreateRentalUseCase, CreateRentalUseCase>();
             services.AddScoped<IRentalCostCalculator, RentalCostCalculator>();
             services.AddScoped<IGetRentalUseCase, GetRentalUseCase>();
+            services.AddScoped<IRentalReturnUseCase, RentalReturnUseCase>();
 
             services.AddScoped<DriverEligibilityValidator>();
             services.AddScoped<RentalPeriodValidator>();
             services.AddScoped<RentalPlanValidator>();
+            services.AddScoped<ReturnRentalValidator>();
 
         }
 
