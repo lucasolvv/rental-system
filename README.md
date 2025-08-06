@@ -49,7 +49,7 @@ A aplicação foi construída com foco em **arquitetura limpa**, uso de **mensag
 Após clonar o projeto em uma pasta da sua maquina, raiz do projeto, execute:
 
 ```bash
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 > Isso irá subir:
