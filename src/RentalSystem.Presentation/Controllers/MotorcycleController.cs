@@ -5,7 +5,6 @@ using RentalSystem.Application.UseCases.Motorcycles.GetMotorcycleUseCases;
 using RentalSystem.Application.UseCases.Motorcycles.UpdateMotorcycleUseCases;
 using RentalSystem.Communication.Requests.Motorcycles;
 using RentalSystem.Communication.Responses;
-using RentalSystem.Exceptions.ExceptionBase;
 using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
@@ -17,6 +16,7 @@ namespace RentalSystem.Presentation.Controllers
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateMotorcycle([FromBody] RequestCreateMotorcycleJson request, [FromServices] ICreateMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(request);
@@ -24,7 +24,7 @@ namespace RentalSystem.Presentation.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ResponseGetMotorcycleJson>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllMotorcycles([FromServices] IGetMotorcycleUseCase useCase,
             [FromQuery] RequestGetMotorcycleByPlateJson request)
         {
@@ -34,7 +34,8 @@ namespace RentalSystem.Presentation.Controllers
         }
 
         [HttpPut("{id}/placa")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseSuccessJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateMotorcycle([FromRoute] string id, [FromBody] RequestGetMotorcycleByPlateJson newPlate,
             [FromServices] IUpdateMotorcycleUseCase useCase)
         {
@@ -53,6 +54,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteMotorcycle([FromRoute] string id, [FromServices] IDeleteMotorcycleUseCase useCase)
         {
             await useCase.ExecuteAsync(id);

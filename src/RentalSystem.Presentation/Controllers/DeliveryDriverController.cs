@@ -2,6 +2,7 @@
 using RentalSystem.Application.UseCases.DeliveryDrivers.CreateDeliveryDriverUseCases;
 using RentalSystem.Application.UseCases.DeliveryDrivers.UpdateDriverCnhUseCases;
 using RentalSystem.Communication.Requests.DeliveryDriver;
+using RentalSystem.Communication.Responses;
 using System.ComponentModel;
 
 namespace RentalSystem.Presentation.Controllers
@@ -13,6 +14,7 @@ namespace RentalSystem.Presentation.Controllers
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateDeliveryDriver([FromBody] RequestCreateDeliveryDriverJson request,
             [FromServices] ICreateDeliveryDriverUseCase useCase)
         {
@@ -22,6 +24,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpPost("{id}/cnh")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateDriverCnh([FromRoute] string id, [FromBody] RequestUpdateDriverCnhJson request,
             [FromServices] IUpdateDriverCnhUseCase useCase)
         {

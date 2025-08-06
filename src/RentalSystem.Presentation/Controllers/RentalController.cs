@@ -10,12 +10,13 @@ using System.ComponentModel;
 namespace RentalSystem.Presentation.Controllers
 {
     [ApiController]
-    [Route("locações")]
+    [Route("locacao")]
     [DisplayName("Locações")]
     public class DeliveryDriversController : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateMotorcycleRental([FromBody] RequestCreateMotorcycleRentalJson request, [FromServices] ICreateRentalUseCase useCase)
         {
             await useCase.ExecuteAsync(request);
@@ -32,6 +33,8 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetRentalById([FromRoute] string id, [FromServices] IGetRentalUseCase useCase)
         {
             var rental = await useCase.GetRentalByIdAsync(id);
@@ -40,6 +43,7 @@ namespace RentalSystem.Presentation.Controllers
 
         [HttpPut("{id}/devolucao")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ReturnRental([FromRoute] string id, [FromBody] RequestRentalReturnJson requestRentalReturnJson, [FromServices] IRentalReturnUseCase useCase)
         {
             var rentalFinalCost = await useCase.ExecuteAsync(id, requestRentalReturnJson.Data_devolucao);
