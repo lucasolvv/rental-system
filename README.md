@@ -41,7 +41,6 @@ A aplicação foi construída com foco em **arquitetura limpa**, uso de **mensag
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
-- (Opcional) Um cliente PostgreSQL como DBeaver ou Azure Data Studio
 
 ---
 
