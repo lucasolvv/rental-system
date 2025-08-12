@@ -1,8 +1,8 @@
 # 🚀 Rental System API
 
-API RESTful para o gerenciamento de **aluguel de motos** e **cadastro de entregadores**, desenvolvida como parte de um desafio técnico.
+API RESTful para o gerenciamento de **aluguel de motos** e **cadastro de entregadores**.
 
-A aplicação foi construída com foco em **arquitetura limpa**, uso de **mensageria via RabbitMQ** e banco de dados **PostgreSQL**.
+A aplicação foi construída com foco em **arquitetura limpa**, uso de **mensageria via RabbitMQ**, banco de dados **PostgreSQL** e **Docker**.
 
 ---
 
@@ -109,7 +109,7 @@ RentalSystem
 
 ---
 
-## ✅ Status do Desafio
+## ✅ Funcionalidades propostas X aplicadas
 
 | Funcionalidade                          | Status        |
 |----------------------------------------|---------------|
